@@ -1,9 +1,3 @@
-drop table if exists event;
-drop table if exists pageview;
-drop table if exists session;
-drop table if exists website;
-drop table if exists account;
-
 CREATE TABLE `account` (
     `user_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(255) NOT NULL,
