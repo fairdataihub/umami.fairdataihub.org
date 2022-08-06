@@ -75,7 +75,7 @@
     "ipaddr.js": "2.0.1",
     "is-ci": "3.0.1",
     "is-docker": "3.0.0",
-    "is-localhost-ip": "1.4.0",
+    "is-localhost-ip": "2.0.0",
     "isbot": "3.5.0",
     "jose": "2.0.5",
     "maxmind": "4.3.6",
