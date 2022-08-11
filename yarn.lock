@@ -1293,10 +1293,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.11.tgz#3c45014821e8c82b247a291f1944dd2764a2d1ed"
   integrity sha512-toizzQkfXL8YJcG/f8j3EYXYGQe4OxiDEItThSigvHU+cYNDw8HPp3wLYQX745hddsnHqOGCM4exitFSBOU8+w==
 
-"@formatjs/cli@5.0.6":
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-5.0.6.tgz#782fe83f8f4b69442b3a64a0448f13493c46a117"
-  integrity sha512-Wq6SmuustVlnSkqboRhnE1Kbw0f/onK+XUmoLHxElgOCfKFdi3/luPtuP1fEx0Z/s3mOMie9qD9QF+Jo7D6TLQ==
+"@formatjs/cli@5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-5.0.7.tgz#3e681fc5c8117a27fd28700adc7819cf144a50e5"
+  integrity sha512-++4ojNPYCa3YQePR7zoNk+q8mp4gF35PUWffR5Ey4PEOsUdyBjSRgCFju/MzsMZRl8R/TUdR8t9AHOu3qIW/BA==
 
 "@formatjs/ecma402-abstract@1.11.8":
   version "1.11.8"
