@@ -2470,10 +2470,10 @@ cli-truncate@^3.1.0:
     slice-ansi "^5.0.0"
     string-width "^5.0.0"
 
-clickhouse@2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/clickhouse/-/clickhouse-2.5.1.tgz#c9b7c7350b26390e8ca96daee436bd85eb8fb2f4"
-  integrity sha512-6f37nhJ0t9PaHS1OhEKemTGeqJrb8256vGS793ZoaH6SCQFdK/oIa/Bh2ybvICHUaZp0/wCLzfdNg8AvufCrkw==
+clickhouse@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/clickhouse/-/clickhouse-2.6.0.tgz#6218e3978fd5f343bdff395d988c5cd44e8b9a03"
+  integrity sha512-HC5OV99GJOup4qZsTuWWPpXlj+847Z0OeygDU2x22rNYost0V/vWapzFWYZdV/5iRbGMrhFQPOyQEzmGvoaWRQ==
   dependencies:
     JSONStream "1.3.4"
     lodash "4.17.21"
