@@ -59,7 +59,7 @@
     "bcryptjs": "2.4.3",
     "chalk": "4.1.2",
     "chart.js": "2.9.4",
-    "classnames": "2.3.1",
+    "classnames": "2.3.2",
     "clickhouse": "2.6.0",
     "colord": "2.9.3",
     "cors": "2.8.5",
