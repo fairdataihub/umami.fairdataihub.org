@@ -78,7 +78,7 @@
     "is-localhost-ip": "2.0.0",
     "isbot": "3.6.0",
     "jose": "2.0.6",
-    "maxmind": "4.3.6",
+    "maxmind": "4.3.8",
     "moment-timezone": "0.5.37",
     "next": "12.3.1",
     "node-fetch": "3.2.10",
