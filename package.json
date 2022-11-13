@@ -81,7 +81,7 @@
     "maxmind": "4.3.8",
     "moment-timezone": "0.5.38",
     "next": "12.3.2",
-    "node-fetch": "3.2.10",
+    "node-fetch": "3.3.0",
     "npm-run-all": "4.1.5",
     "prop-types": "15.8.1",
     "react": "18.2.0",
