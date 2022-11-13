@@ -4176,10 +4176,10 @@ is_js@^0.9.0:
   resolved "https://registry.npmjs.org/is_js/-/is_js-0.9.0.tgz"
   integrity sha512-8Y5EHSH+TonfUHX2g3pMJljdbGavg55q4jmHzghJCdqYDbdNROC8uw/YFQwIRCRqRJT1EY3pJefz+kglw+o7sg==
 
-isbot@3.6.3:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/isbot/-/isbot-3.6.3.tgz#9fbfe9f9a9d1fd834cb1ebeaabb2b6a40d1148d9"
-  integrity sha512-B2AssIfWE+nxgt60ruROLWVyeGR1htfO+MU66+Pn0YycAxC+NyWyqcgKaqLF9dGPzklGp4bgvarDqS8vnaaonw==
+isbot@3.6.5:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/isbot/-/isbot-3.6.5.tgz#a749980d9dfba9ebcc03ee7b548d1f24dd8c9f1e"
+  integrity sha512-BchONELXt6yMad++BwGpa0oQxo/uD0keL7N15cYVf0A1oMIoNQ79OqeYdPMFWDrNhCqCbRuw9Y9F3QBjvAxZ5g==
 
 isexe@^2.0.0:
   version "2.0.0"
