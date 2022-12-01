@@ -70,7 +70,7 @@
     "detect-browser": "5.3.0",
     "dotenv": "16.0.3",
     "formik": "2.2.9",
-    "fs-extra": "10.1.0",
+    "fs-extra": "11.0.0",
     "immer": "9.0.16",
     "ipaddr.js": "2.0.1",
     "is-ci": "3.0.1",
