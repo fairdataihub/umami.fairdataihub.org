@@ -1413,10 +1413,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.14.tgz#3944b809aa7bf27dacd20bdc04a49fb738959724"
   integrity sha512-JDC9AocdPLuGsASkvWw9hS5gtHE7K9dOwL98XLrk5yjYqxy4uVnScG58NUvFMJDVJRl/7c8Wnap6PEs+7Zvj1Q==
 
-"@formatjs/cli@5.1.7":
-  version "5.1.7"
-  resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-5.1.7.tgz#0541dcda883bb4b8fa267f39ff962ef9b4c6f211"
-  integrity sha512-llUllBZw+MAOF51sTo5mSlpFLbvtKFPSa5BqNwAwFS6rl/DXI65bzV8JBjawQujiy0tTS38ZWXVJMDoiZ5trwA==
+"@formatjs/cli@5.1.10":
+  version "5.1.10"
+  resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-5.1.10.tgz#9e26c55c59e60cfccbab5b52628b138ef7a4a213"
+  integrity sha512-KvBfdc+2ARFVNq6bJq7jdHmXKXDDlWLXf3y3fK28JYhvxvQngl7PPkgoDHuFjXZ2dR1nV6bIDEyRBxfia6nINg==
 
 "@formatjs/ecma402-abstract@1.14.3":
   version "1.14.3"
