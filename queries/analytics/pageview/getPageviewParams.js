@@ -1,15 +1,16 @@
-import { getDatabase, parseFilters, rawQuery, runAnalyticsQuery } from 'lib/db';
-import { MYSQL, POSTGRESQL, CLICKHOUSE, RELATIONAL } from 'lib/constants';
+import prisma from 'lib/prisma';
+import { runQuery, CLICKHOUSE, PRISMA } from 'lib/db';
 
 export async function getPageviewParams(...args) {
-  return runAnalyticsQuery({
-    [`${RELATIONAL}`]: () => relationalQuery(...args),
-    [`${CLICKHOUSE}`]: () => clickhouseQuery(...args),
+  return runQuery({
+    [PRISMA]: () => relationalQuery(...args),
+    [CLICKHOUSE]: () => clickhouseQuery(...args),
   });
 }
 
-function relationalQuery(param, website_id, start_at, end_at, column, table, filters = {}) {
-  const params = [param, website_id, start_at, end_at];
+async function relationalQuery(websiteId, start_at, end_at, column, table, filters = {}) {
+  const { parseFilters, rawQuery } = prisma;
+  const params = [start_at, end_at];
   const { pageviewQuery, sessionQuery, eventQuery, joinSession } = parseFilters(
     table,
     column,
@@ -17,28 +18,20 @@ function relationalQuery(param, website_id, start_at, end_at, column, table, fil
     params,
   );
 
-  let splitFn;
-  let db = getDatabase();
-  if (db === MYSQL) splitFn = 'substring_index';
-  if (db === POSTGRESQL) splitFn = 'split_part';
-  if (!splitFn) return Promise.reject(new Error('Unknown database.'));
-
   return rawQuery(
-    `select * from (
-      select
-        url, ${splitFn}(${splitFn}(url, concat($1, '='), 2), '&', 1) param
-      from
-        pageview
-        ${joinSession}
-      where
-        ${table}.website_id=$2 and ${table}.created_at between $3 and $4
-        ${pageviewQuery}
-        ${joinSession && sessionQuery}
-        ${eventQuery}
-      group by 1, 2
-      order by 2 desc
-    ) q
-    where q.param <> ''`,
+    `select url x,
+      count(*) y
+    from ${table}
+      ${` join website on ${table}.website_id = website.website_id`}
+      ${joinSession}
+    where website.website_uuid='${websiteId}'
+      and ${table}.created_at between $1 and $2
+      and ${table}.url like '%?%'
+      ${pageviewQuery}
+      ${joinSession && sessionQuery}
+      ${eventQuery}
+    group by 1
+    order by 2 desc`,
     params,
   );
 }

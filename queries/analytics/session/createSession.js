@@ -1,55 +1,65 @@
-import { CLICKHOUSE, RELATIONAL } from 'lib/constants';
-import {
-  getDateFormatClickhouse,
-  prisma,
-  rawQueryClickhouse,
-  runAnalyticsQuery,
-  runQuery,
-} from 'lib/db';
-import { getSessionByUuid } from 'queries';
+import { CLICKHOUSE, PRISMA, runQuery } from 'lib/db';
+import kafka from 'lib/kafka';
+import prisma from 'lib/prisma';
+import redis from 'lib/redis';
 
 export async function createSession(...args) {
-  return runAnalyticsQuery({
-    [`${RELATIONAL}`]: () => relationalQuery(...args),
-    [`${CLICKHOUSE}`]: () => clickhouseQuery(...args),
+  return runQuery({
+    [PRISMA]: () => relationalQuery(...args),
+    [CLICKHOUSE]: () => clickhouseQuery(...args),
   });
 }
 
-async function relationalQuery(website_id, data) {
-  return runQuery(
-    prisma.session.create({
+async function relationalQuery(websiteId, data) {
+  return prisma.client.session
+    .create({
       data: {
-        website_id,
+        websiteId,
         ...data,
       },
       select: {
-        session_id: true,
+        id: true,
+        sessionUuid: true,
+        hostname: true,
+        browser: true,
+        os: true,
+        screen: true,
+        language: true,
+        country: true,
+        device: true,
       },
-    }),
-  );
+    })
+    .then(async res => {
+      if (redis.enabled && res) {
+        await redis.set(`session:${res.sessionUuid}`, 1);
+      }
+
+      return res;
+    });
 }
 
 async function clickhouseQuery(
-  website_id,
-  { session_uuid, hostname, browser, os, screen, language, country, device },
+  websiteId,
+  { sessionUuid, hostname, browser, os, screen, language, country, device },
 ) {
-  const params = [
-    session_uuid,
-    website_id,
+  const { getDateFormat, sendMessage } = kafka;
+
+  const params = {
+    session_uuid: sessionUuid,
+    website_id: websiteId,
+    created_at: getDateFormat(new Date()),
     hostname,
     browser,
     os,
     device,
     screen,
     language,
-    country ? country : null,
-  ];
+    country: country ? country : null,
+  };
 
-  await rawQueryClickhouse(
-    `insert into umami_dev.session (created_at, session_uuid, website_id, hostname, browser, os, device, screen, language, country)
-      values (${getDateFormatClickhouse(new Date())}, $1, $2, $3, $4, $5, $6, $7, $8, $9);`,
-    params,
-  );
+  await sendMessage(params, 'event');
 
-  return getSessionByUuid(session_uuid);
+  if (redis.enabled) {
+    await redis.set(`session:${sessionUuid}`, 1);
+  }
 }

@@ -1,39 +1,39 @@
 import { subMinutes } from 'date-fns';
-import { CLICKHOUSE, RELATIONAL } from 'lib/constants';
-import { getDateFormatClickhouse, rawQuery, rawQueryClickhouse, runAnalyticsQuery } from 'lib/db';
+import prisma from 'lib/prisma';
+import clickhouse from 'lib/clickhouse';
+import { runQuery, CLICKHOUSE, PRISMA } from 'lib/db';
 
 export async function getActiveVisitors(...args) {
-  return runAnalyticsQuery({
-    [`${RELATIONAL}`]: () => relationalQuery(...args),
-    [`${CLICKHOUSE}`]: () => clickhouseQuery(...args),
+  return runQuery({
+    [PRISMA]: () => relationalQuery(...args),
+    [CLICKHOUSE]: () => clickhouseQuery(...args),
   });
 }
 
-async function relationalQuery(website_id) {
+async function relationalQuery(websiteId) {
   const date = subMinutes(new Date(), 5);
-  const params = [website_id, date];
+  const params = [date];
 
-  return rawQuery(
-    `
-    select count(distinct session_id) x
+  return prisma.rawQuery(
+    `select count(distinct session_id) x
     from pageview
-    where website_id = $1
-    and created_at >= $2
-    `,
+      join website 
+        on pageview.website_id = website.website_id
+    where website.website_uuid = '${websiteId}'
+    and pageview.created_at >= $1`,
     params,
   );
 }
 
-async function clickhouseQuery(website_id) {
-  const params = [website_id];
+async function clickhouseQuery(websiteId) {
+  const { rawQuery, getDateFormat } = clickhouse;
+  const params = [websiteId];
 
-  return rawQueryClickhouse(
-    `
-    select count(distinct session_uuid) x
-    from pageview
+  return rawQuery(
+    `select count(distinct session_id) x
+    from event
     where website_id = $1
-    and created_at >= ${getDateFormatClickhouse(subMinutes(new Date(), 5))}
-    `,
+    and created_at >= ${getDateFormat(subMinutes(new Date(), 5))}`,
     params,
   );
 }

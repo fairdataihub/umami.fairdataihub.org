@@ -1,33 +1,28 @@
-import { CLICKHOUSE, RELATIONAL } from 'lib/constants';
-import {
-  getBetweenDatesClickhouse,
-  getDateQuery,
-  getDateQueryClickhouse,
-  getDateStringQueryClickhouse,
-  parseFilters,
-  rawQuery,
-  rawQueryClickhouse,
-  runAnalyticsQuery,
-} from 'lib/db';
+import prisma from 'lib/prisma';
+import clickhouse from 'lib/clickhouse';
+import { runQuery, CLICKHOUSE, PRISMA } from 'lib/db';
 
 export async function getPageviewStats(...args) {
-  return runAnalyticsQuery({
-    [`${RELATIONAL}`]: () => relationalQuery(...args),
-    [`${CLICKHOUSE}`]: () => clickhouseQuery(...args),
+  return runQuery({
+    [PRISMA]: () => relationalQuery(...args),
+    [CLICKHOUSE]: () => clickhouseQuery(...args),
   });
 }
 
 async function relationalQuery(
-  website_id,
-  start_at,
-  end_at,
-  timezone = 'utc',
-  unit = 'day',
-  count = '*',
-  filters = {},
-  sessionKey = 'session_id',
+  websiteId,
+  {
+    start_at,
+    end_at,
+    timezone = 'utc',
+    unit = 'day',
+    count = '*',
+    filters = {},
+    sessionKey = 'session_id',
+  },
 ) {
-  const params = [website_id, start_at, end_at];
+  const { getDateQuery, parseFilters, rawQuery } = prisma;
+  const params = [start_at, end_at];
   const { pageviewQuery, sessionQuery, joinSession } = parseFilters(
     'pageview',
     null,
@@ -36,58 +31,45 @@ async function relationalQuery(
   );
 
   return rawQuery(
-    `
-      select ${getDateQuery('pageview.created_at', unit, timezone)} t,
+    `select ${getDateQuery('pageview.created_at', unit, timezone)} t,
         count(${count !== '*' ? `${count}${sessionKey}` : count}) y
       from pageview
+        join website
+            on pageview.website_id = website.website_id
         ${joinSession}
-      where pageview.website_id=$1
-        and pageview.created_at between $2 and $3
+      where website.website_uuid='${websiteId}'
+        and pageview.created_at between $1 and $2
         ${pageviewQuery}
         ${sessionQuery}
-      group by 1
-    `,
+      group by 1`,
     params,
   );
 }
 
 async function clickhouseQuery(
-  website_id,
-  start_at,
-  end_at,
-  timezone = 'UTC',
-  unit = 'day',
-  count = '*',
-  filters = {},
-  sessionKey = 'session_uuid',
+  websiteId,
+  { start_at, end_at, timezone = 'UTC', unit = 'day', count = '*', filters = {} },
 ) {
-  const params = [website_id];
-  const { pageviewQuery, sessionQuery, joinSession } = parseFilters(
-    'pageview',
-    null,
-    filters,
-    params,
-    sessionKey,
-  );
+  const { parseFilters, rawQuery, getDateStringQuery, getDateQuery, getBetweenDates } = clickhouse;
+  const params = [websiteId];
+  const { pageviewQuery, sessionQuery } = parseFilters(null, filters, params);
 
-  return rawQueryClickhouse(
-    `
-    select
-      ${getDateStringQueryClickhouse('g.t', unit)} as t, 
+  return rawQuery(
+    `select
+      ${getDateStringQuery('g.t', unit)} as t, 
       g.y as y
     from
       (select 
-        ${getDateQueryClickhouse('created_at', unit, timezone)} t,
-        count(${count !== '*' ? `${count}${sessionKey}` : count}) y
-      from pageview
-        ${joinSession}
-      where pageview.website_id= $1
-        and ${getBetweenDatesClickhouse('pageview.created_at', start_at, end_at)}
+        ${getDateQuery('created_at', unit, timezone)} t,
+        count(${count !== '*' ? 'distinct session_id' : count}) y
+      from event
+      where event_name = ''
+        and website_id= $1        
+        and ${getBetweenDates('created_at', start_at, end_at)}
         ${pageviewQuery}
         ${sessionQuery}
       group by t) g
-    order by t
-    `,
+    order by t`,
     params,
   );
 }

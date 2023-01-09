@@ -29,12 +29,6 @@
       "value": "همه"
     }
   ],
-  "label.all-events": [
-    {
-      "type": 0,
-      "value": "همه‌ی رویدادها"
-    }
-  ],
   "label.all-time": [
     {
       "type": 0,
@@ -250,7 +244,7 @@
   "label.none": [
     {
       "type": 0,
-      "value": "None"
+      "value": "هیچ"
     }
   ],
   "label.owner": [
@@ -475,6 +469,12 @@
     {
       "type": 0,
       "value": "همه‌ی داده‌های مرتبط هم حذف خواهد شد."
+    }
+  ],
+  "message.edit-dashboard": [
+    {
+      "type": 0,
+      "value": "ویرایش داشبورد"
     }
   ],
   "message.failure": [
@@ -751,6 +751,12 @@
       "value": "صفحه‌ها"
     }
   ],
+  "metrics.query-parameters": [
+    {
+      "type": 0,
+      "value": "پارامترهای کوئری"
+    }
+  ],
   "metrics.referrers": [
     {
       "type": 0,
@@ -760,49 +766,13 @@
   "metrics.screens": [
     {
       "type": 0,
-      "value": "Screens"
+      "value": "نمایشگرها"
     }
   ],
   "metrics.unique-visitors": [
     {
       "type": 0,
       "value": "بازدیدکننده‌های یکتا"
-    }
-  ],
-  "metrics.utm": [
-    {
-      "type": 0,
-      "value": "UTM"
-    }
-  ],
-  "metrics.utm_campaign": [
-    {
-      "type": 0,
-      "value": "UTM Campaign"
-    }
-  ],
-  "metrics.utm_content": [
-    {
-      "type": 0,
-      "value": "UTM Content"
-    }
-  ],
-  "metrics.utm_medium": [
-    {
-      "type": 0,
-      "value": "UTM Medium"
-    }
-  ],
-  "metrics.utm_source": [
-    {
-      "type": 0,
-      "value": "UTM Source"
-    }
-  ],
-  "metrics.utm_term": [
-    {
-      "type": 0,
-      "value": "UTM Term"
     }
   ],
   "metrics.views": [

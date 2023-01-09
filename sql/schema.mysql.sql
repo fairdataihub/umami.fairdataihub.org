@@ -1,3 +1,4 @@
+-- CreateTable
 CREATE TABLE `account` (
     `user_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(255) NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE `account` (
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
 CREATE TABLE `event` (
     `event_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `website_id` INTEGER UNSIGNED NOT NULL,
@@ -25,6 +27,7 @@ CREATE TABLE `event` (
     PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
 CREATE TABLE `pageview` (
     `view_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `website_id` INTEGER UNSIGNED NOT NULL,
@@ -41,6 +44,7 @@ CREATE TABLE `pageview` (
     PRIMARY KEY (`view_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
 CREATE TABLE `session` (
     `session_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `session_uuid` VARCHAR(36) NOT NULL,
@@ -60,6 +64,7 @@ CREATE TABLE `session` (
     PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
 CREATE TABLE `website` (
     `website_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `website_uuid` VARCHAR(36) NOT NULL,
@@ -75,4 +80,23 @@ CREATE TABLE `website` (
     PRIMARY KEY (`website_id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- AddForeignKey
+ALTER TABLE `event` ADD CONSTRAINT `event_ibfk_2` FOREIGN KEY (`session_id`) REFERENCES `session`(`session_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `event` ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`website_id`) REFERENCES `website`(`website_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `pageview` ADD CONSTRAINT `pageview_ibfk_2` FOREIGN KEY (`session_id`) REFERENCES `session`(`session_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `pageview` ADD CONSTRAINT `pageview_ibfk_1` FOREIGN KEY (`website_id`) REFERENCES `website`(`website_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `session` ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`website_id`) REFERENCES `website`(`website_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `website` ADD CONSTRAINT `website_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `account`(`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- CreateAdminUser
 INSERT INTO account (username, password, is_admin) values ('admin', '$2b$10$BUli0c.muyCW1ErNJc3jL.vFRFtFJWrT8/GcR4A.sUdCznaXiqFXa', true);
