@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { setItem } from 'next-basics';
 import ButtonLayout from 'components/layout/ButtonLayout';
 import useStore, { checkVersion } from 'store/version';
-import { setItem } from 'lib/web';
 import { REPO_URL, VERSION_CHECK } from 'lib/constants';
 import Button from './Button';
 import styles from './UpdateNotice.module.css';
@@ -18,7 +18,7 @@ export default function UpdateNotice() {
   function handleViewClick() {
     updateCheck();
     setDismissed(true);
-    location.href = releaseUrl || REPO_URL;
+    open(releaseUrl || REPO_URL, '_blank');
   }
 
   function handleDismissClick() {
@@ -30,7 +30,7 @@ export default function UpdateNotice() {
     if (!checked) {
       checkVersion();
     }
-  }, []);
+  }, [checked]);
 
   if (!hasUpdate || dismissed) {
     return null;

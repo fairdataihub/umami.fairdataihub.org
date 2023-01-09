@@ -11,6 +11,18 @@
       "value": "Dodaj konto"
     }
   ],
+  "label.add-column": [
+    {
+      "type": 0,
+      "value": "Dodaj kolumnę"
+    }
+  ],
+  "label.add-filter": [
+    {
+      "type": 0,
+      "value": "Dodaj filtr"
+    }
+  ],
   "label.add-website": [
     {
       "type": 0,
@@ -27,12 +39,6 @@
     {
       "type": 0,
       "value": "Wszystkie"
-    }
-  ],
-  "label.all-events": [
-    {
-      "type": 0,
-      "value": "Wszystkie wydarzenia"
     }
   ],
   "label.all-time": [
@@ -161,6 +167,18 @@
       "value": "Włącz udostępnianie adresu URL"
     }
   ],
+  "label.event-data": [
+    {
+      "type": 0,
+      "value": "Dane zdarzenia"
+    }
+  ],
+  "label.field-name": [
+    {
+      "type": 0,
+      "value": "Nazwa pola"
+    }
+  ],
   "label.invalid": [
     {
       "type": 0,
@@ -250,7 +268,7 @@
   "label.none": [
     {
       "type": 0,
-      "value": "None"
+      "value": "Brak"
     }
   ],
   "label.owner": [
@@ -319,6 +337,12 @@
       "value": "Zapisz"
     }
   ],
+  "label.search": [
+    {
+      "type": 0,
+      "value": "Szukaj"
+    }
+  ],
   "label.settings": [
     {
       "type": 0,
@@ -379,6 +403,12 @@
       "value": "Kod śledzenia"
     }
   ],
+  "label.type": [
+    {
+      "type": 0,
+      "value": "Typ"
+    }
+  ],
   "label.unknown": [
     {
       "type": 0,
@@ -391,6 +421,12 @@
       "value": "Nazwa użytkownika"
     }
   ],
+  "label.value": [
+    {
+      "type": 0,
+      "value": "Wartość"
+    }
+  ],
   "label.view-details": [
     {
       "type": 0,
@@ -401,6 +437,12 @@
     {
       "type": 0,
       "value": "Witryny"
+    }
+  ],
+  "label.yesterday": [
+    {
+      "type": 0,
+      "value": "Wczoraj"
     }
   ],
   "message.active-users": [
@@ -475,6 +517,12 @@
     {
       "type": 0,
       "value": "Wszystkie powiązane dane również zostaną usunięte."
+    }
+  ],
+  "message.edit-dashboard": [
+    {
+      "type": 0,
+      "value": "Edytuj panel"
     }
   ],
   "message.failure": [
@@ -767,6 +815,12 @@
       "value": "Strony"
     }
   ],
+  "metrics.query-parameters": [
+    {
+      "type": 0,
+      "value": "Parametry query"
+    }
+  ],
   "metrics.referrers": [
     {
       "type": 0,
@@ -776,49 +830,13 @@
   "metrics.screens": [
     {
       "type": 0,
-      "value": "Screens"
+      "value": "Ekrany"
     }
   ],
   "metrics.unique-visitors": [
     {
       "type": 0,
       "value": "Unikalni odwiedzający"
-    }
-  ],
-  "metrics.utm": [
-    {
-      "type": 0,
-      "value": "UTM"
-    }
-  ],
-  "metrics.utm_campaign": [
-    {
-      "type": 0,
-      "value": "UTM Campaign"
-    }
-  ],
-  "metrics.utm_content": [
-    {
-      "type": 0,
-      "value": "UTM Content"
-    }
-  ],
-  "metrics.utm_medium": [
-    {
-      "type": 0,
-      "value": "UTM Medium"
-    }
-  ],
-  "metrics.utm_source": [
-    {
-      "type": 0,
-      "value": "UTM Source"
-    }
-  ],
-  "metrics.utm_term": [
-    {
-      "type": 0,
-      "value": "UTM Term"
     }
   ],
   "metrics.views": [

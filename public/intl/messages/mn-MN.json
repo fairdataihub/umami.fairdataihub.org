@@ -29,12 +29,6 @@
       "value": "Бүх"
     }
   ],
-  "label.all-events": [
-    {
-      "type": 0,
-      "value": "Бүх үйл явдал"
-    }
-  ],
   "label.all-time": [
     {
       "type": 0,
@@ -250,7 +244,7 @@
   "label.none": [
     {
       "type": 0,
-      "value": "None"
+      "value": "Байхгүй"
     }
   ],
   "label.owner": [
@@ -403,6 +397,12 @@
       "value": "Вебүүд"
     }
   ],
+  "label.yesterday": [
+    {
+      "type": 0,
+      "value": "Өчигдөр"
+    }
+  ],
   "message.active-users": [
     {
       "type": 0,
@@ -462,7 +462,7 @@
   "message.confirm-reset": [
     {
       "type": 0,
-      "value": "Are your sure you want to reset "
+      "value": "Та "
     },
     {
       "type": 1,
@@ -470,7 +470,7 @@
     },
     {
       "type": 0,
-      "value": "'s statistics?"
+      "value": "-н тоон үзүүлэлтүүдийг устгахдаа итгэлтэй байна уу?"
     }
   ],
   "message.copied": [
@@ -483,6 +483,12 @@
     {
       "type": 0,
       "value": "Үүнтэй холбоотой бүх өгөгдөл устах болно."
+    }
+  ],
+  "message.edit-dashboard": [
+    {
+      "type": 0,
+      "value": "Хянах самбар засах"
     }
   ],
   "message.failure": [
@@ -767,6 +773,12 @@
       "value": "Хуудас"
     }
   ],
+  "metrics.query-parameters": [
+    {
+      "type": 0,
+      "value": "Query параметр"
+    }
+  ],
   "metrics.referrers": [
     {
       "type": 0,
@@ -776,49 +788,13 @@
   "metrics.screens": [
     {
       "type": 0,
-      "value": "Screens"
+      "value": "Дэлгэц"
     }
   ],
   "metrics.unique-visitors": [
     {
       "type": 0,
       "value": "Зочин"
-    }
-  ],
-  "metrics.utm": [
-    {
-      "type": 0,
-      "value": "UTM"
-    }
-  ],
-  "metrics.utm_campaign": [
-    {
-      "type": 0,
-      "value": "UTM Campaign"
-    }
-  ],
-  "metrics.utm_content": [
-    {
-      "type": 0,
-      "value": "UTM Content"
-    }
-  ],
-  "metrics.utm_medium": [
-    {
-      "type": 0,
-      "value": "UTM Medium"
-    }
-  ],
-  "metrics.utm_source": [
-    {
-      "type": 0,
-      "value": "UTM Source"
-    }
-  ],
-  "metrics.utm_term": [
-    {
-      "type": 0,
-      "value": "UTM Term"
     }
   ],
   "metrics.views": [
